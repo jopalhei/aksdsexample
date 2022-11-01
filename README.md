@@ -6,8 +6,10 @@ This is a Deamon Set example to apply a configuration that should have normaly b
 On this example we will change the vm.max_map_count to 262144.
 
 # Usage :
+```
 wget https://raw.githubusercontent.com/jopalhei/aksdsexample/main/ds.yaml
 kubectl apply -f individualnode.yaml
+```
 
 #Note 
 This is just an example on how to use the Daemon Set to apply custom configurations to the AKS Nodes.
