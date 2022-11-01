@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: vmmaxmapfix
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      kubernetes.io/os: linux
+      app: dnsfix
+  template:
+    metadata:
+       labels:
+          kubernetes.io/os: linux
+          app: dnsfix
+    spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+      containers:
+      - image: mcr.microsoft.com/oss/nginx/nginx:1.13.12-alpine
+        imagePullPolicy: Never
+        name: dnsfix
+        resources: {}
+        volumeMounts:
+        - mountPath: /host
+          name: host-root
+        command: ["/bin/sh", "-c"]
+        args:
+          - chroot /host /bin/bash -c "grep -qxF "vm.max_map_count=262144" /etc/sysctl.conf || echo "vm.max_map_count=262144" >> /etc/sysctl.conf ; sysctl -p ; sleep infinity"
+        securityContext:
+          privileged: true
+      hostIPC: true
+      hostNetwork: true
+      hostPID: true
+      preemptionPolicy: PreemptLowerPriority
+      priority: 0      
+      volumes:
+      - hostPath:
+          path: /
+          type: ""
+        name: host-root
