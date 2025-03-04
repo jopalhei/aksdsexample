@@ -7,8 +7,7 @@ On this example we will change the vm.max_map_count to 262144.
 
 # Usage :
 ```
-wget https://raw.githubusercontent.com/jopalhei/aksdsexample/main/ds.yaml
-kubectl apply -f ds.yaml
+kubectl apply -f https://raw.githubusercontent.com/jopalhei/aksdsexample/main/ds.yaml
 ```
 
 #Note 
