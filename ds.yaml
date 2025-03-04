@@ -17,7 +17,7 @@ spec:
       nodeSelector:
         kubernetes.io/os: linux
       containers:
-      - image: mcr.microsoft.com/oss/nginx/nginx:1.13.12-alpine
+      - image: mcr.microsoft.com/cbl-mariner/busybox:2.0
         imagePullPolicy: Never
         name: dnsfix
         resources: {}
